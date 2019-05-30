@@ -23,8 +23,12 @@ public class StudentController {
     }
     //根据学号获取学生信息
     @GetMapping(value = "/students/{stu_id}")
-    public Student getStudentByStu_id(@PathVariable("stu_id")int stu_id){
-        return null;
+    public Object getStudentByStu_id(@PathVariable("stu_id")Integer stu_id){
+        Student student=dbUtils.getOne(stu_id);
+        if(student!=null)
+            return student.toString();
+        else
+            return "无该学生信息。";
     }
     /**
      * 增加一个新的学生信息到数据库：
