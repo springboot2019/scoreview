@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StudentController {
@@ -36,9 +37,9 @@ public class StudentController {
     //根据学号获取学生成绩信息
     @GetMapping(value = "/scores/{student_id}")
     public Object getStudentScoreByStu_id(@PathVariable("student_id")Integer stu_id){
-        Score score=scoreRepository.findScoreByStu_id(stu_id);
-        if(score!=null)
-            return score;
+        List<Score> scores=scoreRepository.findScoreByStu_id(stu_id);
+        if(scores!=null)
+            return scores;
         else
             return "暂无成绩";
     }

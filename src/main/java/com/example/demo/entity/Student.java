@@ -9,7 +9,7 @@ import java.util.Vector;
 
 @Data
 @Entity
-public class Student{
+public class Student implements Serializable{
     @Id
     @Column(unique = true)
     private Integer stu_id;//学号，同时也是登录账号

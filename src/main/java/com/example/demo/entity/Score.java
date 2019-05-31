@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class Score{
+public class Score implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;
