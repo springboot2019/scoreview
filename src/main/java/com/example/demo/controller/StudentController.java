@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dao.DBUtils;
+import com.example.demo.dao.ScoreRepository;
+import com.example.demo.entity.Score;
 import com.example.demo.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,8 @@ public class StudentController {
 
     @Autowired
     private DBUtils dbUtils;
-
+    @Autowired
+    private ScoreRepository scoreRepository;
     //获取所有学生信息
     @GetMapping(value="/students")
     public List getStudents(){
@@ -29,6 +32,15 @@ public class StudentController {
             return student.toString();
         else
             return "无该学生信息。";
+    }
+    //根据学号获取学生成绩信息
+    @GetMapping(value = "/scores/{student_id}")
+    public Object getStudentScoreByStu_id(@PathVariable("student_id")Integer stu_id){
+        Score score=scoreRepository.findScoreByStu_id(stu_id);
+        if(score!=null)
+            return score;
+        else
+            return "暂无成绩";
     }
     /**
      * 增加一个新的学生信息到数据库：
