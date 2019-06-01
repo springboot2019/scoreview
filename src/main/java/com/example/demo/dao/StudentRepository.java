@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DBUtils extends JpaRepository <Student,Integer>{
+public interface StudentRepository extends JpaRepository <Student,Integer>{
 
 }

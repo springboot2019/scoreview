@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dao.DBUtils;
+import com.example.demo.dao.StudentRepository;
 import com.example.demo.dao.ScoreRepository;
 import com.example.demo.entity.Score;
 import com.example.demo.entity.Student;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class StudentController {
 
     @Autowired
-    private DBUtils dbUtils;
+    private StudentRepository studentRepository;
     @Autowired
     private ScoreRepository scoreRepository;
     //获取所有学生信息
@@ -28,7 +28,7 @@ public class StudentController {
     //根据学号获取学生信息
     @GetMapping(value = "/students/{stu_id}")
     public Object getStudentByStu_id(@PathVariable("stu_id")Integer stu_id){
-        Student student=dbUtils.getOne(stu_id);
+        Student student= studentRepository.getOne(stu_id);
         if(student!=null)
             return student.toString();
         else
@@ -58,7 +58,7 @@ public class StudentController {
             System.out.println(bindingResult.getFieldError().getDefaultMessage());
             return "不符合条件，插入失败，请检查是不是有不正确的请求参数";
         }
-        dbUtils.save(student);
+        studentRepository.save(student);
         return student;
     }
 
