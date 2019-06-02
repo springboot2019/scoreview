@@ -3,13 +3,14 @@ package com.example.demo.controller;
 import com.example.demo.dao.StudentRepository;
 import com.example.demo.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class LoginController {
     @Autowired
