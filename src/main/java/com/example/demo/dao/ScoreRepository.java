@@ -13,6 +13,9 @@ import java.util.Optional;
 @Repository
 public interface ScoreRepository extends JpaRepository<Score,Integer> {
     //@Query(value = "select * from score where score.student_id_stu_id=?1",nativeQuery = true)
-    @Query("from Score sc where sc.student_id.stu_id=?1")
+    @Query("from Score sc where sc.student.stu_id=?1")
     List<Score> findScoreByStu_id(Integer stu_id);
+
+    @Query("from Score sc where sc.student.stu_id=?1 and sc.title like concat('%',?2,'%')")
+    List<Score> findScoreByStu_idAndTitle(Integer stu_id,String title);
 }
