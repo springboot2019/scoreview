@@ -35,7 +35,7 @@ public class StudentController {
             return "无该学生信息。";
     }
     //根据学号获取学生成绩信息
-    @GetMapping(value = "/scores/{student_id}")
+   @GetMapping(value = "/scores/{student_id}")
     public Object getStudentScoreByStu_id(@PathVariable("student_id")Integer stu_id){
         List<Score> scores=scoreRepository.findScoreByStu_id(stu_id);
         if(scores!=null)
@@ -84,4 +84,6 @@ public class StudentController {
         return null;
 
     }
+
+
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,7 +17,7 @@ public class Score implements Serializable{
     //private Integer stu_id;
    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Student.class)
    @JoinColumn(referencedColumnName = "stu_id",foreignKey = @ForeignKey(name="FK_stu_score"))
-    private Student student_id;
+    private Student student;
     private Integer chinese;
     private Integer math;
     private Integer english;
@@ -24,6 +25,6 @@ public class Score implements Serializable{
     private Integer chemistry;
     private Integer biology;
     public Score(){super();}
-
+    private LocalDateTime localDateTime;
 
 }
