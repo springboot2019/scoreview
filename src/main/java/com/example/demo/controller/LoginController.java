@@ -40,12 +40,12 @@ public class LoginController {
             modelAndView.setViewName("login");
             return modelAndView;
         }
-        modelAndView.addObject("stu_id",stu_id);
+        modelAndView.addObject("name",currentUser.getName());
         modelAndView.setViewName("succeced");
         return modelAndView;
     }
     @RequestMapping(value = "/succeced")
-    public String loginSucceced(){
-        return "登录成功";
+    public @ResponseBody String loginSucceced(ModelAndView modelAndView){
+        return ((Student)(modelAndView.getModel().get("stu_id"))).getStu_id()+ "登录成功";
     }
 }

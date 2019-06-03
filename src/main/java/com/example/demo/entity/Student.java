@@ -20,6 +20,9 @@ public class Student implements Serializable{
     private Integer stu_id;//学号，同时也是登录账号
     @Size(min=4,max=10,message = "密码必须6-10位")
     private String password;
+    private String name;
+
+    private String sex;
     private String stu_class;
    /* @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
