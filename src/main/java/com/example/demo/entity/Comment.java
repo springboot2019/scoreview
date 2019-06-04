@@ -18,8 +18,13 @@ public class Comment implements Serializable {
     //@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Score.class)
     //@JoinColumn(referencedColumnName = "id",foreignKey = @ForeignKey(name="FK_sco_comment"))
     //private Score score;
+
     private String comment_details;
     private Integer teacher_id;
     private LocalDateTime localDateTime;
+    @ManyToOne(fetch=FetchType.LAZY,targetEntity=Score.class)
+    @JoinColumn(name="score",referencedColumnName = "id",
+            foreignKey = @ForeignKey(name ="FK_Cmo_Score"))
 
+    private Score score;
 }

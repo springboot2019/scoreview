@@ -22,11 +22,8 @@ public class Student implements Serializable{
     private String password;
     private String stu_class;
     private String stuName;
-   /* @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private List<Score> score;*/
-   /* @OneToMany(mappedBy = "stu_id",cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-    private Vector<Score> scores;*/
+
+
     public Student(){super();}
 
 }
