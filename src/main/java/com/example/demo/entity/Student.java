@@ -21,6 +21,7 @@ public class Student implements Serializable{
     @Size(min=4,max=10,message = "密码必须6-10位")
     private String password;
     private String stu_class;
+    private String stuName;
    /* @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private List<Score> score;*/

@@ -15,9 +15,9 @@ public class Comment implements Serializable {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Score.class)
-    @JoinColumn(referencedColumnName = "id",foreignKey = @ForeignKey(name="FK_sco_comment"))
-    private Score score;
+    //@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Score.class)
+    //@JoinColumn(referencedColumnName = "id",foreignKey = @ForeignKey(name="FK_sco_comment"))
+    //private Score score;
     private String comment_details;
     private Integer teacher_id;
     private LocalDateTime localDateTime;

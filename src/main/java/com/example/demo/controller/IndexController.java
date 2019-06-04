@@ -27,7 +27,7 @@ public class IndexController {
     @Autowired
     private CommentRepository commentRepository;
 
-
+    /*
     @RequestMapping("/test")
     public ModelAndView showIndex(
             @RequestParam(value="stuId",required = false) Integer stuId
@@ -72,19 +72,7 @@ public class IndexController {
         };
         Collections.sort(scoreList,cp);
         List<Score> latestScoreList=scoreList.subList(0,6);
-        /*
-        //最近一次成绩各科分数
 
-        latestScore=scoreList.get(0);
-        Map<String,Integer> latestScoreMap = new HashMap<String, Integer>();
-        latestScoreMap.put("biology",latestScore.getBiology());
-        latestScoreMap.put("chemistry",latestScore.getChemistry());
-        latestScoreMap.put("chinese",latestScore.getChinese());
-        latestScoreMap.put("english",latestScore.getEnglish());
-        latestScoreMap.put("math",latestScore.getMath());
-        latestScoreMap.put("physics",latestScore.getPhysics());
-        mv.addObject("latestScoreMap",latestScoreMap);
-        */
 
         //最近六次分数
         mv.addObject("latestScoreList",latestScoreList);
@@ -92,7 +80,8 @@ public class IndexController {
 
         mv.addObject("student",student);
         return mv;
-    }
+    }*/
+
 
 
 }

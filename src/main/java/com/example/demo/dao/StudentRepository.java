@@ -11,5 +11,6 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository <Student,Integer>{
-
+    @Query("from Student st where st.stu_id=?1")
+    Student findStudentByStu_id(Integer stu_id);
 }
