@@ -19,7 +19,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/")
-public class IndexController {
+public class StudentIndexController {
     @Autowired
     private ScoreRepository scoreRepository;
     @Autowired
@@ -87,7 +87,11 @@ public class IndexController {
         //最近六次分数
         mv.addObject("latestScoreList",latestScoreList);
         //学生
-
+        List<Integer> totalList=new ArrayList<>();
+        for(Score each:latestScoreList){
+            totalList.add(each.getTotal());
+        }
+        mv.addObject("totalList",totalList);
         mv.addObject("student",student);
         mv.setViewName("recent_scores");
         //System.out.println(mv.getModel().get("latestScoreList"));

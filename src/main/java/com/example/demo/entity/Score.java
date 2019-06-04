@@ -26,5 +26,6 @@ public class Score implements Serializable{
     private Integer biology;
     public Score(){super();}
     private LocalDateTime localDateTime;
-
+    public Integer getTotal(){
+        return this.biology+this.chemistry+this.chinese+this.english+this.math+this.physics;   }
 }

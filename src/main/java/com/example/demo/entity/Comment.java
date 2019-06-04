@@ -21,5 +21,7 @@ public class Comment implements Serializable {
     private String comment_details;
     private Integer teacher_id;
     private LocalDateTime localDateTime;
-
+    public String getTeacherName(){
+        return "王老师";
+    }
 }
