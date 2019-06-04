@@ -24,6 +24,7 @@ public class Student implements Serializable{
 
     private String sex;
     private String stu_class;
+    private String stuName;
    /* @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private List<Score> score;*/
