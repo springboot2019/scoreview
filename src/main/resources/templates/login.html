@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>学生登录</title>
+    <title>成绩邦</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="w3.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="w3-container">
-    <h2>W3.CSS Login Modal</h2>
+    <h2>我是学生，我要登录</h2>
 
     <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
 
@@ -24,7 +24,7 @@
 
             <div class="w3-center"><br>
                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                <img src="./images/icons/img_avatar4.jpg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
             </div>
 
             <form class="w3-container" th:action="@{/login}" method="post">

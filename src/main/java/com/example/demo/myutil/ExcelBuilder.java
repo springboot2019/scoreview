@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.entity.Score;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class ExcelBuilder {
-    private static ExcelBuilder excelBuilder;
+  /*  private static ExcelBuilder excelBuilder;
     private ExcelBuilder(){};
     public ExcelBuilder getInstance(){
         if(excelBuilder==null){
@@ -44,5 +45,5 @@ public class ExcelBuilder {
         }
         fileIn.close();
         return temp;
-    }
+    }*/
 }

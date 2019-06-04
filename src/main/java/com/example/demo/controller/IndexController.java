@@ -7,18 +7,18 @@ import com.example.demo.entity.Comment;
 import com.example.demo.entity.Score;
 import com.example.demo.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
-@Controller
-@ResponseBody
-@RequestMapping("/index")
+@RestController
+@RequestMapping("/")
 public class IndexController {
     @Autowired
     private ScoreRepository scoreRepository;
@@ -28,19 +28,17 @@ public class IndexController {
     private CommentRepository commentRepository;
 
 
-    @RequestMapping("/test")
-    public ModelAndView showIndex(
-            @RequestParam(value="stuId",required = false) Integer stuId
-    )
+    @RequestMapping (value = "/recent_scores")
+    public ModelAndView showIndex(@ModelAttribute("stu_id")Integer stuId)
 
     {
+                //(Integer) (modelAndView.getModel().get("stu_id"));
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("test");
         List<Score> scoreList = scoreRepository.findScoreByStu_id(stuId);
         List<Comment> commentList = commentRepository.findCommentByStu_id(stuId);
         Student student = studentRepository.getOne(stuId);
         //错误处理
-        if(scoreList.size()==0||commentList.size()==0||student==null){
+       if(scoreList.size()==0||commentList.size()==0||student==null){
             mv.addObject("errors","某项记录返回为空");
             return mv;
         }
@@ -91,8 +89,8 @@ public class IndexController {
         //学生
 
         mv.addObject("student",student);
+        mv.setViewName("recent_scores");
+        //System.out.println(mv.getModel().get("latestScoreList"));
         return mv;
     }
-
-
 }

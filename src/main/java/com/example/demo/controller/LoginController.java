@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -21,7 +22,7 @@ public class LoginController {
         return modelAndView;
     }
     @PostMapping(value="/login")
-    public ModelAndView login(ModelAndView modelAndView, @RequestParam Integer stu_id,@RequestParam String password,BindingResult bindingResult){
+    public ModelAndView login(ModelAndView modelAndView, @RequestParam Integer stu_id, @RequestParam String password, BindingResult bindingResult, RedirectAttributes attr){
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");
@@ -40,12 +41,14 @@ public class LoginController {
             modelAndView.setViewName("login");
             return modelAndView;
         }
-        modelAndView.addObject("name",currentUser.getName());
-        modelAndView.setViewName("succeced");
+        attr.addFlashAttribute("stu_id",currentUser.getStu_id());
+        //modelAndView.addObject("stu_id",currentUser.getStu_id());
+        modelAndView.setViewName("redirect:/recent_scores");//
         return modelAndView;
     }
+/*
     @RequestMapping(value = "/succeced")
-    public @ResponseBody String loginSucceced(ModelAndView modelAndView){
-        return ((Student)(modelAndView.getModel().get("stu_id"))).getStu_id()+ "登录成功";
-    }
+    public String loginSucceced(ModelAndView modelAndView){
+        return "succeced";
+    }*/
 }

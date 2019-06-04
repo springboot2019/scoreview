@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; width: 100%">
+<style>div{float: left}</style>
+<div id="text" style="height: 10% ;width:100%" align="center">
+    <h1>最近考试成绩曲线</h1>
+    <a href="">查看六边形能力图</a>
+</div>
+<div id="chinese" style="height: 50%;width:33%" align="left"></div>
+<div id="math" style="height: 50%;width:33%" align="center"></div>
+<div id="english" style="height: 50%;width:33%" align="right"></div>
+<div id="text1" style="height: 5%;width:33%" align="left"><li align="center">语文</li></div>
+<div id="text2" style="height: 5%;width:33%" align="center"><li align="center">数学</li></div>
+<div id="text3" style="height: 5%;width:33%" align="right"><li align="center">英语</li></div>
+<div id="physics" style="height: 50%;width:33%" align="left"></div>
+<div id="chemistry" style="height: 50%;width:33%" align="center"></div>
+<div id="biology" style="height: 50%;width:33%" align="right"></div>
+<div id="text4" style="height: 33%;width:33%" align="left"><li align="center">物理</li></div>
+<div id="text5" style="height: 33%;width:33%" align="center"><li align="center">化学</li></div>
+<div id="text6" style="height: 33%;width:33%" align="right"><li align="center">生物</li></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    var dom=new Array();
+    dom[0] = document.getElementById("chinese");
+    dom[1] = document.getElementById("math");
+    dom[2] = document.getElementById("english");
+    dom[3] = document.getElementById("physics");
+    dom[4] = document.getElementById("chemistry");
+    dom[5] = document.getElementById("biology");
+    var myChart=new Array();
+    for(i=0;i<6;i++){
+        myChart[i]=echarts.init(dom[i]);
+    }
+    var app = {};
+    /*<![CDATA[*/
+    var sub=/*[[${latestScoreList}]]*/[];
+    /*]]>*/
+    console.log(sub);
+    var subject=new Array();
+    for(i=0;i<6;i++)
+        subject[i]=new Array();
+   /* var sub2=new Array();
+    var sub3=new Array();
+    var sub4=new Array();
+    var sub5=new Array();
+    var sub6=new Array();*/
+    for(i=0;i<sub.length;i++){
+        subject[0][i]=sub[i].chinese;
+        subject[1][i]=sub[i].math;
+        subject[2][i]=sub[i].english;
+        subject[3][i]=sub[i].physics;
+        subject[4][i]=sub[i].chemistry;
+        subject[5][i]=sub[i].biology;
+    }
+    for (i=0;i<sub.length;i++){
+        option = null;
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['.', '..', '...', '....', '.....',  'Now']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [subject[i][0], subject[i][1], subject[i][2], subject[i][3], subject[i][4], subject[i][5]],
+                // data: [70,90,80,55,60,88],
+                type: 'line'
+            }]
+        };
+
+        if (option && typeof option === "object") {
+            myChart[i].setOption(option, true);
+           /* myChart2.setOption(option, true);
+            myChart3.setOption(option, true);
+            myChart4.setOption(option, true);
+            myChart5.setOption(option, true);
+            myChart6.setOption(option, true);*/
+        }
+    }
+
+</script>
+</body>
+</html>
