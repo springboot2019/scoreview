@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class ExcelBuilder {
-  /*  private static ExcelBuilder excelBuilder;
+   private static ExcelBuilder excelBuilder;
     private ExcelBuilder(){};
     public ExcelBuilder getInstance(){
         if(excelBuilder==null){
@@ -45,5 +45,5 @@ public class ExcelBuilder {
         }
         fileIn.close();
         return temp;
-    }*/
+    }
 }
