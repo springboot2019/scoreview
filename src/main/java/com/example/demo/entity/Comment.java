@@ -14,7 +14,7 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-
+    //Comment关联外键score，为了测试导入excel功能需要暂时注释
     //@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Score.class)
     //@JoinColumn(referencedColumnName = "id",foreignKey = @ForeignKey(name="FK_sco_comment"))
     //private Score score;
