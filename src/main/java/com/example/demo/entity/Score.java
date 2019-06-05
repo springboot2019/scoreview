@@ -9,14 +9,18 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Score implements Serializable{
+public class Score{
     @Id
     @GeneratedValue
     private Integer id;
     private String title;
-    //private Integer stu_id;
-   @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Student.class)
-   @JoinColumn(referencedColumnName = "stu_id",foreignKey = @ForeignKey(name="FK_stu_score"))
+
+   /*@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.EAGER,targetEntity = Student.class)
+   @JoinColumn(referencedColumnName = "stu_id",foreignKey = @ForeignKey(name="FK_stu_score"))*/
+   @ManyToOne(fetch=FetchType.EAGER,targetEntity=Student.class)
+   @JoinColumn(name="student",referencedColumnName = "stu_id",
+   foreignKey = @ForeignKey(name ="FK_Sco_Student"))
+   //student是列名，stu_id是外键所在表的属性名(Score内属性为Student但实际上数据库表内列存放stu_id)
     private Student student;
     private Integer chinese;
     private Integer math;

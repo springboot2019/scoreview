@@ -11,11 +11,13 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
     //@Query(value = "select * from score where score.student_id_stu_id=?1",nativeQuery = true)
 
+    //测试excel需要注释
     @Query("select ct from Comment ct where ct.score.id=?1")
     Comment findCommentByScore_id(Integer score_id);
 
     @Query("select ct from Comment ct where ct.score.student.stu_id=?1")
     List<Comment> findCommentByStu_id(Integer stu_id);
+
 
 
 }

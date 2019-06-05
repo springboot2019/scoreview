@@ -40,6 +40,7 @@ public class StudentIndexController {
         //错误处理
        if(scoreList.size()==0||commentList.size()==0||student==null){
             mv.addObject("errors","某项记录返回为空");
+            System.out.println("这里！");
             return mv;
         }
 
@@ -94,7 +95,7 @@ public class StudentIndexController {
         mv.addObject("totalList",totalList);
         mv.addObject("student",student);
         mv.setViewName("recent_scores");
-        //System.out.println(mv.getModel().get("latestScoreList"));
+      //  System.out.println(mv.getModel().get("latestScoreList"));
         return mv;
     }
 }

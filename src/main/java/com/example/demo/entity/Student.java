@@ -12,7 +12,7 @@ import java.util.Vector;
 
 @Data
 @Entity
-public class Student implements Serializable{
+public class Student{
     @Id
     @Column(unique = true)
     //在Integer类型的字段上使用@NotEmpty，@NotEmpty支持的是字符串类型字段，这样子使用肯定是会报错的，改为NotNull
@@ -24,11 +24,9 @@ public class Student implements Serializable{
 
     private String sex;
     private String stu_class;
-   /* @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private List<Score> score;*/
-   /* @OneToMany(mappedBy = "stu_id",cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-    private Vector<Score> scores;*/
+    private String stuName;
+
+
     public Student(){super();}
 
 }
