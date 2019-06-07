@@ -42,7 +42,7 @@ public class LoginController {
             return modelAndView;
         }
         attr.addFlashAttribute("stu_id",currentUser.getStu_id());
-        //modelAndView.addObject("stu_id",currentUser.getStu_id());
+       // modelAndView.addObject("stu_id",currentUser.getStu_id());
         modelAndView.setViewName("redirect:/recent_scores");//
         return modelAndView;
     }
