@@ -20,8 +20,6 @@ public class Student{
     private Integer stu_id;//学号，同时也是登录账号
     @Size(min=4,max=10,message = "密码必须6-10位")
     private String password;
-    private String name;
-
     private String sex;
     private String stu_class;
     private String stuName;
@@ -29,4 +27,14 @@ public class Student{
 
     public Student(){super();}
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "stu_id=" + stu_id +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", stu_class='" + stu_class + '\'' +
+                ", stuName='" + stuName + '\'' +
+                '}';
+    }
 }

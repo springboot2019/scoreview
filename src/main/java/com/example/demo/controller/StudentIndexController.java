@@ -69,8 +69,17 @@ public class StudentIndexController {
                     return 1;
             }
         };
+        Comparator<Score> cp1 = new Comparator<Score>(){
+            public int compare(Score c1,Score c2){
+                if(c1.getLocalDateTime().isBefore(c2.getLocalDateTime()))
+                    return 1;
+                else
+                    return -1;
+            }
+        };
         Collections.sort(scoreList,cp);
         List<Score> latestScoreList=scoreList.subList(0,6);
+        Collections.sort(latestScoreList,cp1);
         /*
         //最近一次成绩各科分数
 

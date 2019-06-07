@@ -12,46 +12,53 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
+    <script src="../static/jquery-3.3.1.js" type="text/javascript"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        function ajaxSubmit(){
+            var stu_id = $("#stu_id").val();
+            var password = $("#password").val();
+            var sex = $("#sex").val();
+            var stu_class = $("#stu_class").val();
+            var stuName = $("#stuName").val();
+            $.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: 'JSON',
+                contentType: "application/json",
+                data: '{'
+                    + '"stu_id":"' + stu_id + '",'
+                    + '"password":"' + password + '",'
+                    + '"sex":"' + sex + '",'
+                    + '"stu_class":"' + stu_class + '",'
+                    + '"stuName":"' + stuName + '"'
+                    + '}',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+
+                },
+            })
+        }
+        /*]]>*/
+    </script>
+
 </head>
 <body>
 <div class="w3-container">
-    <h2>我是学生，我要登录</h2>
-    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
     <h2>我是学生，我要注册</h2>
-    <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-green w3-large">Register</button>
+
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Register</button>
 
     <div id="id01" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
             <div class="w3-center"><br>
                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                <img src="./images/icons/img_avatar4.jpg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-            </div>
-
-            <form class="w3-container" th:action="@{/login}" method="post">
-                <div class="w3-section">
-                    <label><b>学号</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="stu_id" required>
-                    <label><b>密码</b></label>
-                    <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="password" required>
-                    <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-                    <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-                </div>
-            </form>
-
-            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-                <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
-            </div>
-
-        </div>
-    </div>
-</div>
-    <div id="id02" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-            <div class="w3-center"><br>
-                <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
                 <img src="./images/icons/img_avatar4.jpg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
             </div>
 
@@ -73,6 +80,6 @@
 
         </div>
     </div>
-
+</div>
 </body>
 </html>
