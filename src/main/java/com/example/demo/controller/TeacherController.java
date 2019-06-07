@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/manage")
+@RestController
+@RequestMapping(value = "/manage")
 public class TeacherController {
     @Autowired
     private StudentRepository studentRepository;
@@ -26,7 +26,7 @@ public class TeacherController {
     @Autowired
     private ScoreRepository scoreRepository;
     //获取所有学生信息
-    @GetMapping(value="/students")
+    @GetMapping(value="/all_students")
     public List getStudents(){
         return null;
     }
@@ -35,7 +35,8 @@ public class TeacherController {
     public Object getStudentByStu_id(@PathVariable("stu_id")Integer stu_id){
         Student student= studentRepository.getOne(stu_id);
         if(student!=null)
-            return student.toString();
+            //不要用toString，不然Postman解析不了，因为toString转换后并不是json字符串
+            return student;
         else
             return "无该学生信息。";
     }
@@ -90,14 +91,15 @@ public class TeacherController {
 
     }
     //增加成绩信息
-    @GetMapping(value = "/add")
+    @GetMapping(value = "/scores/add")
     public ModelAndView login(ModelAndView modelAndView){
         modelAndView.setViewName("add");
         return modelAndView;
     }
-
-    @GetMapping(path = "/add")
-    @ResponseBody
+/*展示页面用get，提交信息用post(用到requestparam的基本都是post))
+    @GetMapping(value = "/scores/add")
+    @ResponseBody*/
+    @PostMapping(value = "/scores/add")
     public ModelAndView addNewScore(ModelAndView modelAndView,
                                    @RequestParam("stuId") Integer stuId,
                                    @RequestParam("title") String title,
@@ -139,7 +141,7 @@ public class TeacherController {
 
     @GetMapping(path = "/delete")
     @ResponseBody
-    public ModelAndView addNewScore(ModelAndView modelAndView,
+    public ModelAndView deleteScore(ModelAndView modelAndView,
                                     @RequestParam("stuId") Integer stuId,
                                     @RequestParam("title") String title,
                                     BindingResult bindingResult,

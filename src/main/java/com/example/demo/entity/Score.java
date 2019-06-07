@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 //import org.hibernate.annotations.ForeignKey;
 
@@ -9,7 +10,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Score{
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+public class Score implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;

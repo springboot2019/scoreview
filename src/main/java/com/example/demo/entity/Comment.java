@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,8 +10,8 @@ import java.util.Date;
 
 @Data
 @Entity
-
-public class Comment{
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+public class Comment implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;

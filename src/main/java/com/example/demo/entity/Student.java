@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ import java.util.Vector;
 
 @Data
 @Entity
-public class Student{
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })//可以避免很多玄学错误
+public class Student implements Serializable{
     @Id
     @Column(unique = true)
     //在Integer类型的字段上使用@NotEmpty，@NotEmpty支持的是字符串类型字段，这样子使用肯定是会报错的，改为NotNull

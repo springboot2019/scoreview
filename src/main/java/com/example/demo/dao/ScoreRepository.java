@@ -20,14 +20,23 @@ public interface ScoreRepository extends JpaRepository<Score,Integer> {
     @Query("from Score sc where sc.student.stu_id=?1 and sc.title like concat('%',?2,'%')")
     List<Score> findScoreByStu_idAndTitle(Integer stu_id,String title);
 
-    @Query(value = "update score set  chinese = :chinese,math = :math,english=:englist,physics=:physics,chemistry=:chemistry,biology=:biology,where stuId = :stuId and title =:title",nativeQuery = true)
-    void updateScoreByStuIdAndTitle(@RequestParam("stuId") Integer stuId,
+    @Query(value = "update Score set  chinese = :chinese,math = :math,english=:english,physics=:physics,chemistry=:chemistry,biology=:biology where stuId = :stuId and title =:title")
+    void updateScoreByStuIdAndTitle(Integer stuId,
+                                    String title,
+                                    Integer chinese,
+                                    Integer math,
+                                    Integer english,
+                                    Integer physics,
+                                    Integer chemistry,
+                                    Integer biology);
+
+ /*   void updateScoreByStuIdAndTitle(@RequestParam("stuId") Integer stuId,
     @RequestParam("title") String title,
     @RequestParam("chinese") Integer chinese,
     @RequestParam("math") Integer math,
     @RequestParam("english") Integer english,
     @RequestParam("physics") Integer physics,
     @RequestParam("chemistry") Integer chemistry,
-    @RequestParam("biology") Integer biology);
-
+    @RequestParam("biology") Integer biology);*/
+//@Request之类的注解是控制器用的
 }

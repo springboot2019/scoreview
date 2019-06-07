@@ -13,9 +13,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+//@RestController
 public class StudentController {
-
+/*
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -50,7 +50,7 @@ public class StudentController {
      * @return
 
      */
-
+/*
     @PostMapping(value = "/students/add")
 
     public Object addStudent(@Valid Student student, BindingResult bindingResult){
@@ -76,7 +76,7 @@ public class StudentController {
      * @return
 
      */
-
+/*
     @PostMapping(value ="/students/delete")
 
     public String deleteById(@RequestParam(value = "stu_id") int stu_id){
@@ -85,5 +85,5 @@ public class StudentController {
 
     }
 
-
+*/
 }
