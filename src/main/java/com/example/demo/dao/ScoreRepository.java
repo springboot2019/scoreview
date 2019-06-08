@@ -18,9 +18,9 @@ public interface ScoreRepository extends JpaRepository<Score,Integer> {
     List<Score> findScoreByStu_id(Integer stu_id);
 
     @Query("from Score sc where sc.student.stu_id=?1 and sc.title like concat('%',?2,'%')")
-    List<Score> findScoreByStu_idAndTitle(Integer stu_id,String title);
+    Score findScoreByStu_idAndTitle(Integer stu_id,String title);
 
-    @Query(value = "update Score set  chinese = :chinese,math = :math,english=:english,physics=:physics,chemistry=:chemistry,biology=:biology where stuId = :stuId and title =:title")
+    @Query(value = "update Score set  chinese = :chinese,math = :math,english=:english,physics=:physics,chemistry=:chemistry,biology=:biology where student.stu_id = :stuId and title =:title")
     void updateScoreByStuIdAndTitle(Integer stuId,
                                     String title,
                                     Integer chinese,

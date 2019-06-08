@@ -39,7 +39,7 @@ public class RegisterController {
     }*/
     @PostMapping(value = "/register")
     public ModelAndView register(ModelAndView modelAndView, @RequestParam Integer stu_id, @RequestParam String password,
-                                 @RequestParam String sex,@RequestParam String stu_class,@RequestParam String stuName, BindingResult bindingResult){
+                                 @RequestParam String sex,@RequestParam Integer stu_class,@RequestParam String stuName, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");

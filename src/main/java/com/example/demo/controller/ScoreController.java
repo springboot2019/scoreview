@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
+/*
 @Controller
 @RequestMapping("/score")
 public class ScoreController {
@@ -34,3 +34,4 @@ public class ScoreController {
         return scoreList;
     }
 }
+*/

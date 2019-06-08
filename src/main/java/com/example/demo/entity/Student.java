@@ -23,7 +23,7 @@ public class Student implements Serializable{
     @Size(min=4,max=10,message = "密码必须6-10位")
     private String password;
     private String sex;
-    private String stu_class;
+    private Integer stu_class;
     private String stuName;
 
 
