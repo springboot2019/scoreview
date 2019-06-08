@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -53,9 +54,11 @@ public class ExcelController {
     }
 
     @RequestMapping("/create")
-    public void createExcel(String str){
+    public void createExcel(){
+        //for test
+        List<Score> scoreList=scoreRepository.findScoreByStu_id(123);
         try{
-            ExcelBuilder.createExcel();
+            ExcelBuilder.createExcel(scoreList);
         }
         catch (IOException e){
             e.printStackTrace();

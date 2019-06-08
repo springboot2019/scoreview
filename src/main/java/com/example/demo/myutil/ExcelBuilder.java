@@ -83,7 +83,8 @@ public class ExcelBuilder {
         }
         return mapList;
     }
-    public static void createExcel() throws IOException{
+    public static void createExcel(List<Score> scoreList) throws IOException{
+        int i;
         // 获取桌面路径
         FileSystemView fsv = FileSystemView.getFileSystemView();
         String desktop = fsv.getHomeDirectory().getPath();
@@ -94,18 +95,33 @@ public class ExcelBuilder {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sheet1");
         HSSFRow row = sheet.createRow(0);
-        row.createCell(0).setCellValue("id");
-        row.createCell(1).setCellValue("订单号");
-        row.createCell(2).setCellValue("下单时间");
-        row.createCell(3).setCellValue("个数");
-        row.createCell(4).setCellValue("单价");
-        row.createCell(5).setCellValue("订单金额");
+        row.createCell(0).setCellValue("姓名");
+        row.createCell(1).setCellValue("学号");
+        row.createCell(2).setCellValue("标题");
+        row.createCell(3).setCellValue("语文");
+        row.createCell(4).setCellValue("数学");
+        row.createCell(5).setCellValue("英语");
+        row.createCell(6).setCellValue("物理");
+        row.createCell(7).setCellValue("化学");
+        row.createCell(8).setCellValue("生物");
         row.setHeightInPoints(30); // 设置行的高度
 
-        HSSFRow row1 = sheet.createRow(1);
-        row1.createCell(0).setCellValue("1");
-        row1.createCell(1).setCellValue("NO00001");
+        for(i=0;i<scoreList.size();i++){
+            Score score = scoreList.get(i);
+            row = sheet.createRow(i+1);
+            row.createCell(0).setCellValue(score.getStudent().getName());
+            row.createCell(1).setCellValue(score.getStudent().getStu_id());
+            row.createCell(2).setCellValue(score.getTitle());
+            row.createCell(3).setCellValue(score.getChinese());
+            row.createCell(4).setCellValue(score.getMath());
+            row.createCell(5).setCellValue(score.getEnglish());
+            row.createCell(6).setCellValue(score.getPhysics());
+            row.createCell(7).setCellValue(score.getChemistry());
+            row.createCell(8).setCellValue(score.getBiology());
 
+        }
+
+        /*
         // 日期格式化
         HSSFCellStyle cellStyle2 = workbook.createCellStyle();
         HSSFCreationHelper creationHelper = workbook.getCreationHelper();
@@ -142,7 +158,7 @@ public class ExcelBuilder {
         HSSFFormulaEvaluator e = new HSSFFormulaEvaluator(workbook);
         cell5 = e.evaluateInCell(cell5);
         System.out.println(cell5.getNumericCellValue());
-
+        */
 
         workbook.setActiveSheet(0);
         workbook.write(outputStream);
