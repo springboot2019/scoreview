@@ -37,29 +37,42 @@ public class StudentIndexController {
         List<Score> scoreList = scoreRepository.findScoreByStu_id(stuId);
         List<Comment> commentList = commentRepository.findCommentByStu_id(stuId);
         Student student = studentRepository.getOne(stuId);
-        //错误处理
-       if(scoreList.size()==0||commentList.size()==0||student==null){
+        //错误处理 (万恶之首
+       /*if(scoreList.size()==0||commentList.size()==0||student==null){
             mv.addObject("errors","某项记录返回为空");
             System.out.println("这里！");
             return mv;
-        }
+        }*/
 
         //找到最新评论
-
-        Comment latestComment=commentList.get(0);
+        Comment latestComment;
+        if(commentList.size()>0){
+        latestComment=commentList.get(0);
         for(Comment ct:commentList){
             if(ct.getLocalDateTime().isBefore(latestComment.getLocalDateTime()))
                 latestComment=ct;
         }
+        }
+        else {
+            latestComment=null;
+        }
         mv.addObject("latestComment",latestComment);
         //找到最近一次考试成绩
-        Score latestScore=scoreList.get(0);
-        for(Score sc:scoreList){
-            if(sc.getLocalDateTime().isBefore(latestScore.getLocalDateTime()))
-                latestScore=sc;
+        Score latestScore=null;
+        if(scoreList.size()>0) {
+            latestScore = scoreList.get(0);
+            for (Score sc : scoreList) {
+                if (sc.getLocalDateTime().isBefore(latestScore.getLocalDateTime()))
+                    latestScore = sc;
+            }
         }
-
-
+        else {
+            mv.addObject("latestScoreList",null);
+            mv.addObject("totalList",null);
+            mv.addObject("student",student);
+            mv.setViewName("recent_scores");
+            return mv;
+        }
         //分数排序
         Comparator<Score> cp = new Comparator<Score>(){
             public int compare(Score c1,Score c2){
@@ -78,8 +91,15 @@ public class StudentIndexController {
             }
         };
         Collections.sort(scoreList,cp);
-        List<Score> latestScoreList=scoreList.subList(0,6);
-        Collections.sort(latestScoreList,cp1);
+        List<Score> latestScoreList;
+        if(scoreList.size()>=6){
+             latestScoreList=scoreList.subList(0,6);
+        }
+        else {
+            latestScoreList=scoreList.subList(0,scoreList.size());
+        }
+
+       // Collections.sort(latestScoreList,cp1);
         /*
         //最近一次成绩各科分数
 
@@ -101,6 +121,7 @@ public class StudentIndexController {
         for(Score each:latestScoreList){
             totalList.add(each.getTotal());
         }
+        Collections.reverse(totalList);
         mv.addObject("totalList",totalList);
         mv.addObject("student",student);
         mv.setViewName("recent_scores");

@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 //import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 public class Score implements Serializable{
     @Id
     @GeneratedValue
+    @GenericGenerator(name = "system-unid", strategy = "uuid")
     private Integer id;
     private String title;
 

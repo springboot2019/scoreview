@@ -8,6 +8,16 @@ function removeUsers(){
         $('#fimd').form('load',row);
     }
 }
+function fromExcel(){
+        $('#excel_in').dialog('open').dialog('setTitle','通过excel导入（请将xls文件放在电脑桌面然后输入文件名:xxx.xls）');
+
+        $('#ei').form('clear');
+}
+
+function toExcel(){
+    $('#excel_out').dialog('open').dialog('setTitle','通过excel导出(将生成template.xls文件到桌面)');
+    $('#eo').form('clear');
+}
 //添加新用户
 function newUsers(){
     //添加用户对话框

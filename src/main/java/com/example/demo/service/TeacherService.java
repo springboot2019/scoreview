@@ -2,11 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Score;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 public interface TeacherService {
+    boolean register(Teacher teacher);
     //获取所有学生信息
      public List getStudents();
     //根据学号获取学生信息

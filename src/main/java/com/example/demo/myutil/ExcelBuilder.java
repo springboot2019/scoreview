@@ -17,6 +17,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.swing.filechooser.FileSystemView;
 
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
+
 public class ExcelBuilder {
    private static ExcelBuilder excelBuilder;
     private ExcelBuilder(){};
@@ -31,7 +33,7 @@ public class ExcelBuilder {
         //默认文件置于桌面，获取文件绝对路径
         FileSystemView fsv = FileSystemView.getFileSystemView();
         String desktop = fsv.getHomeDirectory().getPath();
-        String filePath = desktop + xlsPath;
+        String filePath = desktop + "\\"+xlsPath;
 
         String stuName ;
         Integer stuId ;
@@ -55,9 +57,10 @@ public class ExcelBuilder {
                 for(int i=0;i<9;i++){
                     System.out.println(r.getCell(i).getCellType());
                 }
-
+                r.getCell(1).setCellType(0);
+                for(int i=3;i<9;i++)
+                    r.getCell(i).setCellType(0);
                 stuName=r.getCell(0).getStringCellValue();
-
                 stuId=new Integer((int)r.getCell(1).getNumericCellValue());
                 score.setTitle(r.getCell(2).getStringCellValue());
                 score.setChinese(new Integer((int)r.getCell(3).getNumericCellValue()));
@@ -66,9 +69,6 @@ public class ExcelBuilder {
                 score.setPhysics(new Integer((int)r.getCell(6).getNumericCellValue()));
                 score.setChemistry(new Integer((int)r.getCell(7).getNumericCellValue()));
                 score.setBiology(new Integer((int)r.getCell(8).getNumericCellValue()));
-
-
-
                 hm.put("score",score);
                 hm.put("stuId",stuId);
                 hm.put("stuName",stuName);
@@ -83,7 +83,8 @@ public class ExcelBuilder {
         }
         return mapList;
     }
-    public static void createExcel() throws IOException{
+    public static void createExcel(List<Score> scoreList) throws IOException{
+        int i;
         // 获取桌面路径
         FileSystemView fsv = FileSystemView.getFileSystemView();
         String desktop = fsv.getHomeDirectory().getPath();
@@ -94,18 +95,33 @@ public class ExcelBuilder {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sheet1");
         HSSFRow row = sheet.createRow(0);
-        row.createCell(0).setCellValue("id");
-        row.createCell(1).setCellValue("订单号");
-        row.createCell(2).setCellValue("下单时间");
-        row.createCell(3).setCellValue("个数");
-        row.createCell(4).setCellValue("单价");
-        row.createCell(5).setCellValue("订单金额");
+        row.createCell(0).setCellValue("姓名");
+        row.createCell(1).setCellValue("学号");
+        row.createCell(2).setCellValue("标题");
+        row.createCell(3).setCellValue("语文");
+        row.createCell(4).setCellValue("数学");
+        row.createCell(5).setCellValue("英语");
+        row.createCell(6).setCellValue("物理");
+        row.createCell(7).setCellValue("化学");
+        row.createCell(8).setCellValue("生物");
         row.setHeightInPoints(30); // 设置行的高度
 
-        HSSFRow row1 = sheet.createRow(1);
-        row1.createCell(0).setCellValue("1");
-        row1.createCell(1).setCellValue("NO00001");
+        for(i=0;i<scoreList.size();i++){
+            Score score = scoreList.get(i);
+            row = sheet.createRow(i+1);
+            row.createCell(0).setCellValue(score.getStudent().getStuName());
+            row.createCell(1).setCellValue(score.getStudent().getStu_id());
+            row.createCell(2).setCellValue(score.getTitle());
+            row.createCell(3).setCellValue(score.getChinese());
+            row.createCell(4).setCellValue(score.getMath());
+            row.createCell(5).setCellValue(score.getEnglish());
+            row.createCell(6).setCellValue(score.getPhysics());
+            row.createCell(7).setCellValue(score.getChemistry());
+            row.createCell(8).setCellValue(score.getBiology());
 
+        }
+
+        /*
         // 日期格式化
         HSSFCellStyle cellStyle2 = workbook.createCellStyle();
         HSSFCreationHelper creationHelper = workbook.getCreationHelper();
@@ -142,7 +158,7 @@ public class ExcelBuilder {
         HSSFFormulaEvaluator e = new HSSFFormulaEvaluator(workbook);
         cell5 = e.evaluateInCell(cell5);
         System.out.println(cell5.getNumericCellValue());
-
+        */
 
         workbook.setActiveSheet(0);
         workbook.write(outputStream);

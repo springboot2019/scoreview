@@ -11,22 +11,22 @@
     <!--<a href="">查看六边形能力图</a> -->
 </div>
 <div style="height: 50%;width:16.7%" align="left">
-    <h4 th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'+${latestScoreList.get(0).getTitle()}">&nbsp;&nbsp;&nbsp;&nbsp;最近考试成绩</h4>
+    <h4 th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getTitle():'暂无成绩信息'}">&nbsp;&nbsp;&nbsp;&nbsp;最近考试成绩</h4>
     <ul>
-        <li th:text="'  语文 '+${latestScoreList.get(5).getChinese()}">语文 100</li>
-        <li th:text="'  数学 '+${latestScoreList.get(5).getMath()}">数学 100</li>
-        <li th:text="'  英语 '+${latestScoreList.get(5).getEnglish()}">英语 100</li>
-        <li th:text="'  物理 '+${latestScoreList.get(5).getPhysics()}">物理 100</li>
-        <li th:text="'  化学 '+${latestScoreList.get(5).getChemistry()}">化学 100</li>
-        <li th:text="'  生物 '+${latestScoreList.get(5).getBiology()}">生物 100</li>
+        <li th:text="'  语文 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getChinese():''}">语文 100</li>
+        <li th:text="'  数学 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getMath():''}">数学 100</li>
+        <li th:text="'  英语 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getEnglish():''}">英语 100</li>
+        <li th:text="'  物理 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getPhysics():''}">物理 100</li>
+        <li th:text="'  化学 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getChemistry():''}">化学 100</li>
+        <li th:text="'  生物 '+${latestScoreList!=null&&latestScoreList.get(0)!=null?latestScoreList.get(0).getBiology():''}">生物 100</li>
     </ul>
 </div>
 <div style="height: 50%;width:16.7%" align="left">
     <br/>
     <br/>
     <br/>
-    <p th:text="${latestComment.getComment_details()}">考得不错！就是粗心了点！下次加油哦！</p>
-    <p th:text="${'--'+latestComment.getTeacherName()}" align="right">--陈老师</p>
+    <p th:text="${latestComment!=null?latestComment.getComment_details():''}">考得不错！就是粗心了点！下次加油哦！</p>
+    <p th:text="${latestComment!=null?'--'+latestComment.getTeacherName():''}" align="right">--陈老师</p>
 </div>
 <div id="total" style="height: 50%;width:33.3%" align="center"></div>
 <div style="height: 50%;width:33.3%" align="right"></div>
@@ -77,15 +77,15 @@
     for(i=0;i<6;i++)
         subject[i]=new Array();
     for(i=0;i<sub.length;i++){
-        subject[0][i]=sub[i].chinese;
-        subject[1][i]=sub[i].math;
-        subject[2][i]=sub[i].english;
-        subject[3][i]=sub[i].physics;
-        subject[4][i]=sub[i].chemistry;
-        subject[5][i]=sub[i].biology;
+        subject[0][sub.length-i-1]=sub[i].chinese;
+        subject[1][sub.length-i-1]=sub[i].math;
+        subject[2][sub.length-i-1]=sub[i].english;
+        subject[3][sub.length-i-1]=sub[i].physics;
+        subject[4][sub.length-i-1]=sub[i].chemistry;
+        subject[5][sub.length-i-1]=sub[i].biology;
     }
     option = null;
-    for (i=0;i<sub.length;i++){
+    for (i=0;i<6;i++){
         option = {
             xAxis: {
                 type: 'category',
@@ -95,7 +95,7 @@
                 type: 'value'
             },
             series: [{
-                data: [subject[i][0], subject[i][1], subject[i][2], subject[i][3], subject[i][4], subject[i][5]],
+                data:subject[i], /*[subject[i][0], subject[i][1], subject[i][2], subject[i][3], subject[i][4], subject[i][5]],*/
                 // data: [70,90,80,55,60,88],
                 type: 'line'
             }]
@@ -114,7 +114,7 @@
             type: 'value'
         },
         series: [{
-            data: [totalList[0], totalList[1], totalList[2], totalList[3], totalList[4], totalList[5]],
+            data: totalList/*[totalList[5], totalList[4], totalList[3], totalList[2], totalList[1], totalList[0]]*/,
             // data: [70,90,80,55,60,88],
             type: 'line'
         }]

@@ -2,8 +2,10 @@ package com.example.demo.serviceImpl;
 
 import com.example.demo.dao.ScoreRepository;
 import com.example.demo.dao.StudentRepository;
+import com.example.demo.dao.TeacherRepository;
 import com.example.demo.entity.Score;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,19 @@ public class TeacherServiceImpl implements TeacherService {
     private StudentRepository studentRepository;
     @Autowired
     private ScoreRepository scoreRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Override
+    public boolean register(Teacher teacher) {
+        if(teacherRepository.existsById(teacher.getTea_id()))
+            return false;
+        else {
+            teacherRepository.save(teacher);
+            return true;
+        }
+    }
+
     @Override
     public List getStudents() {
         return studentRepository.findAll();

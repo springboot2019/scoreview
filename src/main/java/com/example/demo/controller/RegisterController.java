@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.StudentRepository;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import com.example.demo.service.StudentService;
+import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,9 +19,16 @@ import javax.validation.Valid;
 public class RegisterController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
     @GetMapping(value = "/register")
     public ModelAndView register(ModelAndView modelAndView){
         modelAndView.setViewName("register");
+        return modelAndView;
+    }
+    @GetMapping(value = "/teacher_register")
+    public ModelAndView teacherRegister(ModelAndView modelAndView){
+        modelAndView.setViewName("teacher_register");
         return modelAndView;
     }
     //试图用ajax从前端直接传对象，一直报415错误，改了contentType也不行，遂放弃
@@ -39,7 +48,8 @@ public class RegisterController {
     }*/
     @PostMapping(value = "/register")
     public ModelAndView register(ModelAndView modelAndView, @RequestParam Integer stu_id, @RequestParam String password,
-                                 @RequestParam String sex,@RequestParam Integer stu_class,@RequestParam String stuName, BindingResult bindingResult){
+                                 @RequestParam String sex,@RequestParam Integer stu_class,
+                                 @RequestParam String stuName, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");
@@ -52,6 +62,21 @@ public class RegisterController {
         student.setStuName(stuName);
         student.setStu_id(stu_id);
         studentService.Register(student);
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+    @PostMapping(value = "/teacherRegister")
+    public ModelAndView teacherRegister(ModelAndView modelAndView, @RequestParam Integer tea_id,
+                                        @RequestParam String password,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
+        Teacher teacher=new Teacher();
+        teacher.setTea_id(tea_id);
+        teacher.setPassword(password);
+        teacherService.register(teacher);
         modelAndView.setViewName("login");
         return modelAndView;
     }

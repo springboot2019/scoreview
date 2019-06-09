@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.StudentRepository;
+import com.example.demo.dao.TeacherRepository;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,9 +18,16 @@ import javax.validation.Valid;
 public class LoginController {
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
     @GetMapping(value = "/login")
     public ModelAndView login(ModelAndView modelAndView){
         modelAndView.setViewName("login");
+        return modelAndView;
+    }
+    @GetMapping(value = "/teacherLogin")
+    public ModelAndView teacherLogin(ModelAndView modelAndView){
+        modelAndView.setViewName("teacherLogin");
         return modelAndView;
     }
     @PostMapping(value="/login")
@@ -44,6 +53,30 @@ public class LoginController {
         attr.addFlashAttribute("stu_id",currentUser.getStu_id());
        // modelAndView.addObject("stu_id",currentUser.getStu_id());
         modelAndView.setViewName("redirect:/recent_scores");//
+        return modelAndView;
+    }
+
+    @PostMapping(value="/teacherLogin")
+    public ModelAndView teacherLogin(ModelAndView modelAndView, @RequestParam Integer tea_id, @RequestParam String password, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
+        // Integer stu_id = student.getStu_id();
+        // String password = student.getPassword();
+        Teacher currentUser=teacherRepository.getOne(tea_id);
+        if(currentUser==null){
+            modelAndView.addObject("error","无此用户！");
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
+        else if(!currentUser.getPassword().equals(password)){
+            modelAndView.addObject("error","密码错误！");
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
+        modelAndView.setViewName("index");//
         return modelAndView;
     }
 /*
